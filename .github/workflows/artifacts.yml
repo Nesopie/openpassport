@@ -1,0 +1,51 @@
+name: OpenPassport CI/CD
+on:
+  push:
+    branches:
+      - main
+    # paths:
+    #   - "circuits/circuits/**"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: |
+          npm i -g yarn && yarn
+      - name: Setup Rust
+        uses: dtolnay/rust-toolchain@stable
+
+      - name: Download Circom Binary v2.1.9
+        run: |
+          wget -qO /home/runner/work/circom https://github.com/iden3/circom/releases/download/v2.1.9/circom-linux-amd64
+          chmod +x /home/runner/work/circom
+          sudo mv /home/runner/work/circom /bin/circom
+
+      - name: Print Circom version
+        run: circom --version
+
+      - name: Install cpp dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --yes \
+            build-essential \
+            libgmp-dev \
+            libsodium-dev \
+            nasm \
+            nlohmann-json3-dev
+
+      - name: Build cpp circuits
+        run: |
+          chmod +x circuits/scripts/build_cpp_circuits.sh && \
+          ./circuits/scripts/build_cpp_circuits.sh register && 
+          ./circuits/scripts/build_cpp_circuits.sh disclose && 
+          ./circuits/scripts/build_cpp_circuits.sh dsc
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: my-artifact
+          path: output/
