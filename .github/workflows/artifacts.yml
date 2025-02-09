@@ -44,8 +44,9 @@ jobs:
           ./circuits/scripts/build_cpp_circuits.sh register && 
           ./circuits/scripts/build_cpp_circuits.sh disclose && 
           ./circuits/scripts/build_cpp_circuits.sh dsc
+
       - name: Upload Artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: my-artifact
           path: output/
