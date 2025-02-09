@@ -5,3 +5,4 @@ node_modules/
 err.log
 .env
 output/
+install_artifact.sh

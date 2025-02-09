@@ -70,12 +70,12 @@ elif [[ $1 == "dsc" ]]; then
     allowed_circuits=("${DSC_CIRCUITS[@]}")
     output="output/dsc"
     mkdir -p$output
-    basepath="./circuits/circuits/dsc"
+    basepath="./circuits/circuits/instances/dsc"
 elif [[ $1 == "disclose" ]]; then
     allowed_circuits=("${DISCLOSE_CIRCUITS[@]}")
     output="output/disclose"
     mkdir -p $output
-    basepath="./circuits/circuits/disclose/instances"
+    basepath="./circuits/circuits/disclose"
 fi
 
 pids=() 
