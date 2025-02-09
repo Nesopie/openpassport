@@ -40,13 +40,13 @@ jobs:
 
       - name: Build cpp circuits
         run: |
-          chmod +x circuits/scripts/build_cpp_circuits.sh && \
-          ./circuits/scripts/build_cpp_circuits.sh register && 
-          ./circuits/scripts/build_cpp_circuits.sh disclose && 
-          ./circuits/scripts/build_cpp_circuits.sh dsc
+          chmod +x circuits/scripts/build/build_cpp.sh && \
+          ./circuits/scripts/build/build_cpp.sh register && 
+          ./circuits/scripts/build/build_cpp.sh disclose && 
+          ./circuits/scripts/build/build_cpp.sh dsc
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: my-artifact
+          name: circuits
           path: output/
