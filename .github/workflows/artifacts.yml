@@ -15,7 +15,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          npm i -g yarn && yarn
+          npm i -g yarn && cd circuits && yarn
       - name: Setup Rust
         uses: dtolnay/rust-toolchain@stable
 
